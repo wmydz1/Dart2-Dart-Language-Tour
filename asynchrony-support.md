@@ -54,11 +54,11 @@ lookUpVersion() async => /* ... */;
 
 `String lookUpVersionSync() => '1.0.0';`  
 
-如果你想更改它成为异步方法-因为一个将来的实现是耗时的-它的返回值是一个 `Future` 。
+如果你想更改它成为异步方法-因为在以后的实现中将会非常耗时-它的返回值是一个 `Future` 。
 
 `Future<String> lookUpVersion() async => '1.0.0';`
 
-请注意方法体不需要使用 `Future API`，如果必要 Dart 创建 `Future` 对象。
+请注意函数体不需要使用 `Future API`，如果必要 Dart 将会自己创建 `Future` 对象。
 
 ## 与 Futures 使用 await 表达式
 
@@ -66,7 +66,7 @@ lookUpVersion() async => /* ... */;
 
 `await expression`
 
-在异步方法中你可以使用 `await` 多次。比如，下列代码等待了方法的结果三次。
+在异步方法中你可以使用 `await` 多次。比如，下列代码等待了函数的执行结果三次。
 
 ```
 var entrypoint = await findEntrypoint();
@@ -74,9 +74,9 @@ var exitCode = await runExecutable(entrypoint, args);
 await flushThenExit(exitCode);
 ```
 
-在 `await expression`， `expression` 的值通常是一个 `Future`；如果不是，这个值会自动转成一个 `Future`，一个 `Future` 对象表明希望返回一个对象。`await expression` 的值就是返回的对象。`await ` 表达式执行暂停直到对象可用。
+在 `await 表达式`， `表达式` 的值通常是一个 `Future` 对象；如果不是，这个值会自动转成一个 `Future`，一个 `Future` 对象表明希望返回一个对象。`await 表达式` 的值就是返回的对象。在对象可用之前，await 表达式将会一直处于暂停状态。
 
-**如果 `await` 不工作，确认他是一个异步方法。**比如，使用`await` 在你的 `main()` 函数里面，`main()` 函数体必须被 `async` 标记：
+**如果 `await` 没有起作用，确认它是一个异步方法。**比如，在你的 `main()` 函数里面使用`await` ，`main()` 函数体必须被 `async` 标记：
 
 ```
 main() async {
@@ -95,16 +95,16 @@ await for (variable declaration in expression) {
 }
 ```  
 
-`expression` 的值必须有 `Stream` 类型。执行过程如下：  
+`表达式` 的值必须有 `Stream` 类型。执行过程如下：  
 
-1. 等待直到 stream 发出一个值
+1. 在 stream 发出一个值之前等待
 2. 执行 for 循环的主体，把变量设置为发出的值。
 3. 重复 1 和 2，直到 Stream 关闭
 
 
 如果要停止监听 stream ，你可以使用 `break` 或者 `return` 声明，跳出循环取消来自 `stream` 订阅 。
 
-**如果一个异步 for 循环没有工作，确认它是一个异步方法。** 比如，使用异步的 for 循环你的应用的 `main()` 方法，main() 的方法体必须被 `await` 标记。
+**如果一个异步 for 循环没有正常运行，确认它是一个异步方法。** 比如，使用异步的 for 循环你的应用的 `main()` 方法，main() 的方法体必须被 `await` 标记。
 
 ```
 main() async {
