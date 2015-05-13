@@ -104,7 +104,7 @@ await for (variable declaration in expression) {
 
 如果要停止监听 stream ，你可以使用 `break` 或者 `return` 声明，跳出循环取消来自 `stream` 订阅 。
 
-**如果一个异步 for 循环没有正常运行，确认它是一个异步方法。** 比如，在你的应用的 `main()` 方法使用异步的 for 循环，main() 的方法体必须被 `await` 标记。
+**如果一个异步 for 循环没有正常运行，确认它是一个异步方法。** 比如，在你的应用的 `main()` 方法使用异步的 for 循环，main() 的方法体必须被 `async` 标记。
 
 ```
 main() async {
