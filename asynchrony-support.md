@@ -39,7 +39,7 @@ try {
 ```
 
 ##声明异步函数
-一个异步函数是一个用 `async` 修饰符标记的函数。虽然一个异步函数可能执行耗时操作，它可以在任何方法体执行之前返回。
+一个异步函数是用 `async` 修饰符标记的函数。虽然一个异步函数可能执行耗时操作，但它可以在任何方法体执行之前返回。
 
 ```
 checkVersion() async {
@@ -50,11 +50,11 @@ lookUpVersion() async => /* ... */;
 
 ```
 
-在函数中添加关键字 `async ` 使得它返回一个 `Future`，比如想想这个函数异步，它返回一个字符串。  
+在函数中添加关键字 `async ` 使得它返回一个 `Future`对象，比如，考虑一下这个同步函数，它将返回一个字符串。  
 
 `String lookUpVersionSync() => '1.0.0';`  
 
-如果你想更改它成为异步方法-因为在以后的实现中将会非常耗时-它的返回值是一个 `Future` 。
+如果你想更改它成为异步函数-因为在以后的实现中将会非常耗时-它的返回值是一个 `Future` 对象。
 
 `Future<String> lookUpVersion() async => '1.0.0';`
 
@@ -74,7 +74,7 @@ var exitCode = await runExecutable(entrypoint, args);
 await flushThenExit(exitCode);
 ```
 
-在 `await 表达式`， `表达式` 的值通常是一个 `Future` 对象；如果不是，这个值会自动转成一个 `Future`，一个 `Future` 对象表明希望返回一个对象。`await 表达式` 的值就是返回的对象。在对象可用之前，await 表达式将会一直处于暂停状态。
+在 `await 表达式`， `表达式` 的值通常是一个 `Future` 对象；如果不是，这个值会自动转成一个 `Future`，这个 `Future` 对象表明了表达式应该返回一个对象。。`await 表达式` 的值就是返回的对象。在对象可用之前，await 表达式将会一直处于暂停状态。
 
 **如果 `await` 没有起作用，确认它是一个异步方法。**比如，在你的 `main()` 函数里面使用`await` ，`main()` 函数体必须被 `async` 标记：
 
@@ -104,7 +104,7 @@ await for (variable declaration in expression) {
 
 如果要停止监听 stream ，你可以使用 `break` 或者 `return` 声明，跳出循环取消来自 `stream` 订阅 。
 
-**如果一个异步 for 循环没有正常运行，确认它是一个异步方法。** 比如，使用异步的 for 循环你的应用的 `main()` 方法，main() 的方法体必须被 `await` 标记。
+**如果一个异步 for 循环没有正常运行，确认它是一个异步方法。** 比如，在你的应用的 `main()` 方法使用异步的 for 循环，main() 的方法体必须被 `await` 标记。
 
 ```
 main() async {
