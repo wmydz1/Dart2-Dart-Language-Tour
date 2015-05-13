@@ -11,11 +11,11 @@ Dart 添加了一些新的语言特性用于支持异步编程。最通常使用
 - 使用 `async` 和一个异步的 for 循环 (`await for`)
 - 使用 ` Stream API`
 
-代码使用 `async` 和 `await` 是异步的，它看起来很像同步的代码。比如这里有一些代码使用 `await` 等待一个异步函数的结果：  
+代码使用 `async` 和 `await` 是异步的，它看起来很像同步的代码。比如这里有一些代码使用 `await` 等待一个异步函数的执行结果：  
 
 `await lookUpVersion()`  
 
-使用 `await`，代码必须在用 `await` 标记
+使用 `await`，代码必须在用 `async` 标记
 
 ```
 checkVersion() async {
