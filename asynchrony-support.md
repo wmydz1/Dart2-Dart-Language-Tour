@@ -1,5 +1,5 @@
 #异步的支持
-Dart 添加了一些新的语言特性用于支持异步编程。最通常使用的特性是 `async` 方法和 `await` 表达式。Dart 的库有很多方法返回 `Future` 和 `Stream` 的对象。这些方法是异步的。它们在建立一个可能的耗时操作比如 ` I/O` 操作之后返回，无需等待操作完成
+Dart 添加了一些新的语言特性用于支持异步编程。最通常使用的特性是 `async` 方法和 `await` 表达式。Dart 库大多方法返回 `Future` 和 `Stream` 对象。这些方法是异步的：它们在设置一个可能的耗时操作（比如 ` I/O` 操作）之后返回，而无需等待操作完成
 
 当你需要使用 `Future` 来表示一个值时，你有两个选择。  
 
@@ -11,11 +11,11 @@ Dart 添加了一些新的语言特性用于支持异步编程。最通常使用
 - 使用 `async` 和一个异步的 for 循环 (`await for`)
 - 使用 ` Stream API`
 
-代码使用 `async` 和 `await` 是异步的，它看起来很像同步的代码。比如这里有一些代码使用 `await` 等待一个异步函数的执行结果：  
+使用 `async` 和 `await` 的代码是异步的，不过它看起来很像同步的代码。比如这里有一段使用 `await` 等待一个异步函数结果的代码：  
 
 `await lookUpVersion()`  
 
-使用 `await`，代码必须在用 `async` 标记
+要使用 `await`，代码必须用 `await` 标记
 
 ```
 checkVersion() async {
@@ -28,7 +28,7 @@ checkVersion() async {
 }
 ```
 
-你可以使用 `try`, `catch`, 和 `finally` 处理和清理使用 `await` 的代码。
+你可以使用 `try`, `catch`, 和 `finally` 来处理错误并精简使用了 `await` 的代码。
 
 ```
 try {
@@ -39,7 +39,7 @@ try {
 ```
 
 ##声明异步函数
-一个异步函数是用 `async` 修饰符标记的函数。虽然一个异步函数可能执行耗时操作，但它可以在任何方法体执行之前返回。
+一个异步函数是一个由 `async` 修饰符标记的函数。虽然一个异步函数可能在操作上比较耗时，但是它可以立即返回-在任何方法体执行之前。
 
 ```
 checkVersion() async {
@@ -50,23 +50,23 @@ lookUpVersion() async => /* ... */;
 
 ```
 
-在函数中添加关键字 `async ` 使得它返回一个 `Future`对象，比如，考虑一下这个同步函数，它将返回一个字符串。  
+在函数中添加关键字 `async ` 使得它返回一个 `Future`，比如，考虑一下这个同步函数，它将返回一个字符串。  
 
 `String lookUpVersionSync() => '1.0.0';`  
 
-如果你想更改它成为异步函数-因为在以后的实现中将会非常耗时-它的返回值是一个 `Future` 对象。
+如果你想更改它成为异步方法-因为在以后的实现中将会非常耗时-它的返回值是一个 `Future` 。
 
 `Future<String> lookUpVersion() async => '1.0.0';`
 
-请注意函数体不需要使用 `Future API`，如果必要 Dart 将会自己创建 `Future` 对象。
+请注意函数体不需要使用 `Future API`，如果必要的话 Dart 将会自己创建 `Future` 对象。
 
-## 与 Futures 使用 await 表达式
+##使用带 Future 的 await 表达式
 
 一个 `await`表达式具有以下形式
 
 `await expression`
 
-在异步方法中你可以使用 `await` 多次。比如，下列代码等待了函数的执行结果三次。
+在异步方法中你可以使用 `await` 多次。比如，下列代码为了得到函数的结果一共等待了三次。
 
 ```
 var entrypoint = await findEntrypoint();
@@ -74,9 +74,9 @@ var exitCode = await runExecutable(entrypoint, args);
 await flushThenExit(exitCode);
 ```
 
-在 `await 表达式`， `表达式` 的值通常是一个 `Future` 对象；如果不是，这个值会自动转成一个 `Future`，这个 `Future` 对象表明了表达式应该返回一个对象。。`await 表达式` 的值就是返回的对象。在对象可用之前，await 表达式将会一直处于暂停状态。
+在 `await 表达式`中， `表达式` 的值通常是一个 `Future` 对象；如果不是，那么这个值会自动转为 `Future`。这个 `Future` 对象表明了表达式应该返回一个对象。`await 表达式` 的值就是返回的一个对象。在对象可用之前，`await ` 表达式将会一直处于暂停状态。
 
-**如果 `await` 没有起作用，确认它是一个异步方法。**比如，在你的 `main()` 函数里面使用`await` ，`main()` 函数体必须被 `async` 标记：
+**如果 `await` 没有起作用，请确认它是一个异步方法。**比如，在你的 `main()` 函数里面使用`await`，`main()` 的函数体必须被 `async` 标记：
 
 ```
 main() async {
@@ -85,9 +85,9 @@ main() async {
 }
 ``` 
 
-##与 Streams 使用异步循环
+##结合 Streams 使用异步循环
 
-一个异步循环具有一下形式：
+一个异步循环具有以下形式：
 
 ```
 await for (variable declaration in expression) {
@@ -95,16 +95,16 @@ await for (variable declaration in expression) {
 }
 ```  
 
-`表达式` 的值必须有 `Stream` 类型。执行过程如下：  
+`表达式` 的值必须有Stream 类型（流类型）。执行过程如下：  
 
 1. 在 stream 发出一个值之前等待
 2. 执行 for 循环的主体，把变量设置为发出的值。
 3. 重复 1 和 2，直到 Stream 关闭
 
 
-如果要停止监听 stream ，你可以使用 `break` 或者 `return` 声明，跳出循环取消来自 `stream` 订阅 。
+如果要停止监听 stream ，你可以使用 `break` 或者 `return` 语句，跳出循环并取消来自 `stream` 的订阅 。
 
-**如果一个异步 for 循环没有正常运行，确认它是一个异步方法。** 比如，在你的应用的 `main()` 方法使用异步的 for 循环，main() 的方法体必须被 `async` 标记。
+**如果一个异步 for 循环没有正常运行，请确认它是一个异步方法。** 比如，在应用的 `main()` 方法中使用异步的 for 循环时，main() 的方法体必须被 `async` 标记。
 
 ```
 main() async {
@@ -116,7 +116,7 @@ main() async {
 }
 ```    
 
-更多关于异步编程的信息，看 ` dart:async` 库部分的介绍。你也可以看文章 [Dart Language Asynchrony Support: Phase 1 ](https://www.dartlang.org/articles/await-async/)和 [Dart Language Asynchrony Support: Phase 2](https://www.dartlang.org/articles/beyond-async/), 和 [the Dart language specification](https://www.dartlang.org/docs/spec/)  
+更多关于异步编程的信息，请看 ` dart:async` 库部分的介绍。你也可以看文章 [Dart Language Asynchrony Support: Phase 1 ](https://www.dartlang.org/articles/await-async/)和 [Dart Language Asynchrony Support: Phase 2](https://www.dartlang.org/articles/beyond-async/), 和 [the Dart language specification](https://www.dartlang.org/docs/spec/)  
 
 
 
